@@ -1,0 +1,627 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>R, RStudio Desktop and NoMachine Overview</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="75cd573d-27cd-46b2-9019-1b724b1ea3af" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="R,%20RStudio%20Desktop%20and%20NoMachine%20Overview%2075cd573d27cd46b290191b724b1ea3af/rstudio-icon.png"/></div><h1 class="page-title">R, RStudio Desktop and NoMachine Overview</h1></header><div class="page-body"><figure id="f55d17e8-7d0d-4bac-b741-3e3dc23e4377" class="image"><a href="R,%20RStudio%20Desktop%20and%20NoMachine%20Overview%2075cd573d27cd46b290191b724b1ea3af/Untitled.png"><img style="width:1519px" src="R,%20RStudio%20Desktop%20and%20NoMachine%20Overview%2075cd573d27cd46b290191b724b1ea3af/Untitled.png"/></a></figure><figure id="3510edf7-5651-4af3-b121-3e9c9f2bedb6"><a href="https://www.r-project.org" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The R Project for Statistical Computing</div><div class="bookmark-description">R is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. To , please choose your preferred CRAN mirror. If you have questions about R like how to download and install the software, or what the license terms are, please read our answers to frequently asked questions before you send an email.</div></div><div class="bookmark-href"><img src="https://www.r-project.org/favicon-16x16.png" class="icon bookmark-icon"/>https://www.r-project.org</div></div><img src="https://www.r-project.org/Rlogo.png" class="bookmark-image"/></a></figure><h2 id="551a1ec2-5cd0-4b6a-9ca6-c40899c6ca9f" class="">R Studio Desktop</h2><figure id="982c7093-b4d4-4fb0-8d30-5ca60d37e5ab"><a href="https://rstudio.com/products/rstudio/download/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Download RStudio</div><div class="bookmark-description">RStudio is a set of integrated tools designed to help you be more productive with R. It includes a console, syntax-highlighting editor that supports direct code execution, and a variety of robust tools for plotting, viewing history, debugging and managing your workspace.</div></div><div class="bookmark-href"><img src="https://rstudio.com/favicon-16x16.png" class="icon bookmark-icon"/>https://rstudio.com/products/rstudio/download/</div></div><img src="https://rstudio.com/assets/img/og/rstudio-og-fb-1.jpg" class="bookmark-image"/></a></figure><h2 id="3ba2c8f9-d35c-45b5-9c2e-d900e7bf7fec" class="">NoMachine</h2><figure id="a61bd763-5c36-4a0b-8b70-353fbb450cb9"><a href="https://www.nomachine.com" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">NoMachine - Free Remote Desktop For Everybody</div><div class="bookmark-description">Get to your desktop at the speed of light. NoMachine is the fastest remote desktop you have ever tried. Control any computer in the world and start working on it as if it was right in front of you. Free for individual use.</div></div><div class="bookmark-href"><img src="https://www.nomachine.com/favicon.ico" class="icon bookmark-icon"/>https://www.nomachine.com</div></div><img src="https://www.nomachine.com/NMLogo.png" class="bookmark-image"/></a></figure><p id="cdb1c86a-7edf-4c33-b56e-ace92ae3c068" class="">The bookmarks above provide links to their respective homepages along with a brief description. We can use <em><strong>NoMachine</strong></em> as a remote desktop into <em><strong>Biowulf</strong></em> or <strong><em>Helix</em></strong> with the benefit of acting as a <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> for <em><strong>Biowulf</strong></em> or <strong><em>Helix. </em></strong>With <em><strong>NoMachine</strong></em>, we can run <em><strong>R Studio Desktop</strong></em> from <em><strong>Biowulf. NoMachine </strong></em>and <em><strong>RStudio Desktop</strong></em>, provide a mechanism of analyzing data located on <em><strong>Biowulf, </strong></em>however, with the cost of setup time and potential network issues. </p><p id="ca56bcc7-8b91-4d53-939a-2a63eb9c2c6d" class="">We recommend <em><strong>RStudio Desktop </strong></em>whenever possible locally - use <em><strong>NoMachines</strong></em> only if needed with data stored remotely. Windows users should contact your IT Tech support for installation.</p><ul id="a61cb1da-8c84-44c0-aa08-9e8518bc6bd0" class="toggle"><li><details open=""><summary>We&#x27;ve developed a set of webpages to get you up and running</summary><ul id="bb29b071-b113-4799-a002-988693061dda" class="bulleted-list"><li><em><strong>Installing RStudio Desktop on the Mac </strong></em>- This page outline the steps necessary to install <em><strong>RStudio Desktop.</strong></em> Because <strong><em>R</em></strong> is required, we will also describe its installation there.</li></ul><ul id="fa14a953-2a27-46c3-b668-b5b4757903c8" class="bulleted-list"><li><strong><em>Installing Packages on RStudio Desktop</em></strong> - Packages greatly extend out-of-the-box functionality for <em><strong>R</strong></em> and <em><strong>RStudio Desktop</strong></em>.</li></ul><ul id="f2e03d8d-b490-43c5-84c7-27face94a8bd" class="bulleted-list"><li><em><strong>Installing Packages in R </strong></em>- This describes how to install packages on the <em><strong>R</strong></em> app.</li></ul><ul id="feba4e14-af7e-408a-afa8-0cb69c3a53b2" class="bulleted-list"><li><em><strong>NoMachine Installation for Biowulf</strong></em> - This describes how to install <em><strong>NoMachine</strong></em> for remote desktop on <em><strong>Helix</strong></em> or <em><strong>Biowulf</strong></em>, however, <em><strong>RStudio Desktop</strong></em> can only be run from <em><strong>Biowulf</strong></em>. </li></ul><ul id="a28c7584-d622-42ee-bb2a-90f846d876dc" class="bulleted-list"><li><em><strong>Running RStudio on Biowulf with NoMachine</strong></em> - This explains it all.</li></ul><ul id="593c1bb0-ca97-4ed8-ba3d-a45abd5e3d46" class="bulleted-list"><li><em><strong>Running R in  Biowulf</strong></em> - How to run <em><strong>R</strong></em> interactively on <strong><em>Biowulf</em></strong>.</li></ul></details></li></ul><figure id="08baa7d7-6664-4102-814c-7d56015491e4" class="image"><a href="R,%20RStudio%20Desktop%20and%20NoMachine%20Overview%2075cd573d27cd46b290191b724b1ea3af/biowulf.png"><img style="width:1820px" src="R,%20RStudio%20Desktop%20and%20NoMachine%20Overview%2075cd573d27cd46b290191b724b1ea3af/biowulf.png"/></a></figure><ul id="abaa0c86-fbe2-4a7d-a5ea-fbaaec8374f6" class="toggle"><li><details open=""><summary>Extremely useful webpages from Biowulf - High Performance Computing at the NIH</summary><p id="a75e5928-7914-483f-ad9a-f4289cda487d" class=""><em><strong>About Biowulf</strong></em> - <a href="https://hpc.nih.gov/">https://hpc.nih.gov</a></p><p id="a475ad1b-bb3e-458b-9ccb-b245115e64f9" class=""><em><strong>How NIH employess can get user accounts</strong></em> - <a href="https://hpc.nih.gov/docs/accounts.html">https://hpc.nih.gov/docs/accounts.html</a></p><p id="21c45c81-b333-48c3-b727-1bf6771b1dcb" class=""><em><strong>Apps available on Biowulf</strong></em> - <a href="https://hpc.nih.gov/apps/">https://hpc.nih.gov/apps/</a></p><p id="7cf94de1-7f18-453e-9dc6-8291323b3a5b" class=""><em><strong>R/Bioconductor on Biowulf</strong></em> - <a href="https://hpc.nih.gov/apps/R.html">https://hpc.nih.gov/apps/R.html</a></p><p id="3aeb3a16-20fb-4ab9-9553-119f94eda825" class=""><em><strong>RStudio on Biowulf</strong></em> - <a href="https://hpc.nih.gov/apps/RStudio.html">https://hpc.nih.gov/apps/RStudio.html</a></p></details></li></ul></div></article></body></html>

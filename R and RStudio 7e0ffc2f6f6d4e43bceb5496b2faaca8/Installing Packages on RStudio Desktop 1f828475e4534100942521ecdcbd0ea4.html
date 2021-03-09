@@ -1,0 +1,631 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Installing Packages on RStudio Desktop</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f828475-e453-4100-9425-21ecdcbd0ea4" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/rstudio-icon.png"/></div><h1 class="page-title">Installing Packages on RStudio Desktop</h1></header><div class="page-body"><p id="af4adbee-1eb1-4d7c-86cd-488d790c236c" class="">A multitude of packages are available that extend the capability of <em><strong>R</strong></em> and <em><strong>RStudio Desktop,</strong></em> such as analysis packages and useful utilities. These packages are provided for your use by those who develop them. As with all open source software, consider the source and use at your own risk. Let&#x27;s install <em><strong>BiocManager </strong></em>package. <em><strong>BiocManager </strong></em>is an <em><strong>R</strong></em><strong> </strong>package that allows you to install all other<strong> </strong><strong><em>Bioconductor</em></strong><strong> </strong>packages from the<strong> </strong><strong><em>Bioconductor </em></strong>repository. If you have not heard of<strong> </strong><strong><em>Bioconductor</em></strong>, it is the<strong> </strong><em>Open Source Software for Bioinformatics</em><strong>. </strong>This repository is curated and is generally of high quality. <em> </em>Click on the link below to learn more.</p><figure id="417550a4-ba24-47c5-8ad6-5b14fa03f115"><a href="https://www.bioconductor.org" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Bioconductor - Home</div><div class="bookmark-description">provides tools for the analysis and comprehension of high-throughput genomic data. uses the R statistical programming language, and is open source and open development. It has two releases each year, and an active user community. Bioconductor is also available as an AMI (Amazon Machine Image) and Docker images.</div></div><div class="bookmark-href"><img src="https://www.bioconductor.org/favicon.ico" class="icon bookmark-icon"/>https://www.bioconductor.org</div></div><img src="https://www.bioconductor.org/images/logo_bioconductor.gif" class="bookmark-image"/></a></figure><p id="2bd8f68d-666c-427d-a08e-797a944e4d38" class="">Here is an overview for this webpage:</p><ul id="e29daf7e-482e-483c-814c-bd0a8d5befdb" class="bulleted-list"><li>CRAN package Repository - What is CRAN? </li></ul><ul id="7f5cd5a7-0b6f-4cbf-8b44-a44657c50992" class="bulleted-list"><li>Installing CRAN and <em><strong>Bioconductor</strong></em> Packages - Installing packages and getting help.</li></ul><h2 id="044adf3d-fbf5-42c1-8be8-73a24d4af2eb" class="">CRAN package Repository</h2><p id="3eb3a5ca-b22e-417d-93e8-2a3cc29f5ffc" class="">The <strong>C</strong>omprehensive <strong>R</strong> <strong>A</strong>rchive Network or <em><strong>CRAN</strong></em>. <em><strong>CRAN</strong></em> is described by the <em><strong>R</strong></em> Website as:</p><blockquote id="dc9915ae-524a-449b-b403-b88b8df36d42" class="">... a network of ftp and web servers around the world that store identical, up-to-date, versions of code and documentation for R.</blockquote><p id="65ed3db9-8a62-4b4c-a292-21e4bbaf0084" class="">CRAN hosts a set of statistical computing and graphics packages.  In addition, it has many utilities for simplifying its use. As of June 2020, there are 15,801 available packages. Good luck on finding the right one for your needs. Information on <em><strong>CRAN</strong></em> and how to find packages is provided with the link below:</p><figure id="f16cbdaa-5bbc-47d8-b91a-1c28f4832099"><a href="http://lib.stat.cmu.edu/R/CRAN/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The Comprehensive R Archive Network</div></div><div class="bookmark-href"><img src="http://lib.stat.cmu.edu/R/CRAN/favicon.ico" class="icon bookmark-icon"/>http://lib.stat.cmu.edu/R/CRAN/</div></div></a></figure><p id="dbcb8556-45d3-4e77-b66c-066ed1a0cab6" class="">We will install a <em><strong>CRAN</strong></em> package <em><strong>BiocManager</strong></em>, which is a utility for installing and managing <strong><em>Bioconductor</em></strong> software packages and package dependancies. A single <em><strong>Bioconductor</strong></em> analysis packages can have a long list of dependency software: system software, other <em><strong>Bioconductor</strong></em> package and <em><strong>CRAN</strong></em> packages. <em><strong>BiocManager</strong></em> deals with further complications of dependent package versions with a single command.</p><h2 id="cf6cb23e-c35e-4690-bec7-ba4e01e1f09c" class="">Installing CRAN and <em><strong>Bioconductor</strong></em> Packages</h2><ol id="df6d12d6-c7f8-421a-95ec-4a7ab3a51144" class="numbered-list" start="1"><li>Launch <strong><em>RStudio Desktop </em></strong>from the <em>Applications </em>folder<strong><em> </em></strong>as you did before.<strong><em> </em></strong>Click the + item (upper far-left in graphic below) and open a new R Script.<figure id="b4daf857-4771-420b-83d9-823f3f537aad" class="image"><a href="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/junk.jpg"><img style="width:1622px" src="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/junk.jpg"/></a></figure></li></ol><ol id="e737c0d6-b611-4d5b-8b19-a1229a725df8" class="numbered-list" start="2"><li>In the upper-left pane, type the following command and click the <em><strong>Source</strong></em> button (right-top) to execute a single line of code or <em><strong>Run</strong></em> which executes all of the windows commands. You can save this file as a permanent record of the commands you used. Or, you can type these commands directly into the Console pane (lower-left window) and hit <em>return</em> button. Saving the commands in an R script file is best for repeatability and documentation. Type in the code:<p id="3f0ea135-4343-4156-9c47-020c6d296968" class=""><code>if (!requireNamespace(&quot;BiocManager&quot;, quietly = TRUE))</code>
+<code>    install.packages(&quot;BiocManager&quot;)
+BiocManager::install(version = &quot;3.11&quot;)</code></p><figure id="210a7fee-c912-41b6-a6f8-2f742d60c768" class="image"><a href="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/pane1.jpg"><img style="width:1822px" src="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/pane1.jpg"/></a></figure><p id="1402c907-50c1-44bc-8e5a-0a83796473d8" class="">
+</p></li></ol><ol id="df20f024-0156-4121-bb2f-c2987acd40fd" class="numbered-list" start="3"><li>You will be prompted in the <em><strong>Console</strong></em> pane (lower-left). Click on the <em><strong>Console</strong></em> pane and type <strong>a</strong> and hit the return key to install all required packages<figure id="ed8bc8c3-1131-4f25-a03e-6d177ea45ea7" class="image"><a href="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/Console_Pane.jpg"><img style="width:1826px" src="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/Console_Pane.jpg"/></a></figure></li></ol><ol id="faaf8a4d-b881-443e-9dc4-1768813f2ba6" class="numbered-list" start="4"><li>To learn about the <em><strong>BiocManager</strong></em> package, type <code><em><strong>??BiocManager</strong></em></code><em><strong> </strong></em>in the <em><strong>Console</strong></em> pane.<figure id="68d3deb1-5c35-4e35-b683-66c5f1de5871" class="image"><a href="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/dddd.jpg"><img style="width:1507px" src="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/dddd.jpg"/></a></figure><p id="829bff9c-d8cd-486a-8183-b9e256067818" class="">Click on the <em><strong>Help</strong></em> tab in the lower-right pane and click <em>BiocManager::BiocManager</em> link.</p><figure id="4f0c2546-fd4f-45fb-a98e-4ad47bdc496a" class="image"><a href="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/help.png"><img style="width:1597px" src="Installing%20Packages%20on%20RStudio%20Desktop%201f828475e4534100942521ecdcbd0ea4/help.png"/></a></figure></li></ol><ol id="30f40f2e-a45a-44bd-81e5-1f76e71f60bd" class="numbered-list" start="5"><li>Try on your own to install <em><strong>DESeq2</strong></em> package with <code><em><strong>BiocManager::install(&quot;DESeq2&quot;)</strong></em></code>. After installation, type <code><em><strong>??DESeq2</strong></em></code><em><strong> </strong></em>in the console section. Use the instructions from the link below: <figure id="c147ea93-de86-4943-9b52-9f81fd593a4a"><a href="https://www.bioconductor.org/packages/release/bioc/html/DESeq2.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">DESeq2</div><div class="bookmark-description">DOI: 10.18129/B9.bioc.DESeq2 Bioconductor version: Release (3.11) Estimate variance-mean dependence in count data from high-throughput sequencing assays and test for differential expression based on a model using the negative binomial distribution.</div></div><div class="bookmark-href"><img src="https://www.bioconductor.org/favicon.ico" class="icon bookmark-icon"/>https://www.bioconductor.org/packages/release/bioc/html/DESeq2.html</div></div><img src="http://bioconductor.org/images/logo/jpg/bioconductor_logo_rgb.jpg" class="bookmark-image"/></a></figure></li></ol><ol id="9ec4c152-fc2f-44e1-bfa4-9d63724731d3" class="numbered-list" start="6"><li>Bioconductor Repository. Find packages for version 3.1.1 with the link below<figure id="9f670829-2394-472e-81d0-de57112b6670"><a href="https://bioconductor.org/packages/3.11/bioc/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Bioconductor Software Packages</div><div class="bookmark-description">Access the ArrayExpress Microarray Database at EBI and build Bioconductor data structures: ExpressionSet, AffyBatch, NChannelSet</div></div><div class="bookmark-href"><img src="https://bioconductor.org/favicon.ico" class="icon bookmark-icon"/>https://bioconductor.org/packages/3.11/bioc/</div></div><img src="https://bioconductor.org/images/logo_bioconductor.gif" class="bookmark-image"/></a></figure></li></ol><ol id="37cdfa96-3a3b-4659-bde4-5dad57532a6b" class="numbered-list" start="7"><li>Try to install <strong><em>ggplot2</em></strong> from <em><strong>R</strong></em> CRAN repository using <code><em>install.packages(&quot;ggplot2&quot;)</em></code><code> </code>and learn about it with <code><em>??ggplot2</em></code><em>.</em></li></ol><ol id="628a543e-3d07-4d90-94e7-9912259beddb" class="numbered-list" start="8"><li>Final notes:<em><strong> </strong></em><ul id="e6f543b2-8ae3-43b6-85e2-9fe0c9a2998b" class="bulleted-list"><li>Package names are case sensitive.</li></ul><ul id="efaf2011-aa69-428f-a1f5-22f8c9c55063" class="bulleted-list"><li>Use <code><strong><em>install.packages()</em></strong></code>, to install packages from the <em><strong>CRAN</strong></em> repository.</li></ul><ul id="daf33183-9b44-4a46-ba31-bb690451dee0" class="bulleted-list"><li>Use <code><strong>BiocManager::install() </strong></code>to install packages specific to<em> </em><em><strong>Bioconductor </strong></em>repository<em><strong>.</strong></em></li></ul><ul id="bdfa0da3-cafb-43fd-aeed-bcf5c3c56223" class="bulleted-list"><li>To use a package, you must install once and load each time:<ul id="68a844e5-d3fd-4d03-bcba-3e0dbec56bd6" class="bulleted-list"><li>Install once - <code><strong>install.packages</strong></code><code><em>(&quot;DESeq2&quot;)</em></code></li></ul><ul id="c78b540a-0006-4bc2-99c3-4753060b7d17" class="bulleted-list"><li>Load each time to use - <code><strong><em>library</em></strong></code><code><em>(&quot;DESeq2&quot;)</em></code></li></ul><ul id="01ab96e8-cab5-4ef5-9779-d181393dec01" class="bulleted-list"><li>Get information about the package - <code><em>??ggplot2</em></code></li></ul><p id="b9108ecf-23b1-43e3-aa46-51d9c9a1c377" class="">
+</p></li></ul></li></ol></div></article></body></html>
